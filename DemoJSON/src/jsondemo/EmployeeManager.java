@@ -28,15 +28,19 @@ public class EmployeeManager {
             System.out.println("\nEmployee Manager");
             System.out.println("1. View All Employees");
             System.out.println("2. Add New Employee");
-            System.out.println("3. Exit");
+            System.out.println("3. Update Employee");
+            System.out.println("4. Delete Employee");
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-
+        
             switch (choice) {
                 case 1 -> displayEmployees(employees);
                 case 2 -> addEmployee(scanner, employees);
-                case 3 -> {
+                case 3 -> updateEmployee(scanner, employees);
+                case 4 -> deleteEmployee(scanner, employees);
+                case 5 -> {
                     saveEmployeesToFile(employees);
                     System.out.println("Exiting program. Goodbye!");
                     return;
@@ -84,6 +88,55 @@ public class EmployeeManager {
 
         employees.add(newEmployee);
         System.out.println("Employee added successfully.");
+    }
+
+    private static void updateEmployee(Scanner scanner, JSONArray employees) {
+        System.out.print("Enter Employee ID to update: ");
+        String id = scanner.nextLine();
+    
+        boolean updated = false;
+        for (Object obj : employees) {
+            JSONObject employee = (JSONObject) obj;
+            if (employee.get("id").equals(id)) {
+                System.out.print("Enter new name (leave blank to keep current): ");
+                String newName = scanner.nextLine();
+                if (!newName.isBlank()) employee.put("name", newName);
+    
+                System.out.print("Enter new department (leave blank to keep current): ");
+                String newDepartment = scanner.nextLine();
+                if (!newDepartment.isBlank()) employee.put("department", newDepartment);
+    
+                updated = true;
+                break;
+            }
+        }
+    
+        if (updated) {
+            System.out.println("Employee updated successfully.");
+        } else {
+            System.out.println("Employee not found.");
+        }
+    }
+
+    private static void deleteEmployee(Scanner scanner, JSONArray employees) {
+        System.out.print("Enter Employee ID to delete: ");
+        String id = scanner.nextLine();
+    
+        boolean deleted = false;
+        for (int i = 0; i < employees.size(); i++) {
+            JSONObject employee = (JSONObject) employees.get(i);
+            if (employee.get("id").equals(id)) {
+                employees.remove(i);
+                deleted = true;
+                break;
+            }
+        }
+    
+        if (deleted) {
+            System.out.println("Employee deleted successfully.");
+        } else {
+            System.out.println("Employee not found.");
+        }
     }
 
     private static boolean employeeExists(JSONArray employees, String id) {
