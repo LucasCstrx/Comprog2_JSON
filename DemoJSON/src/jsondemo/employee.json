@@ -1,1 +1,30 @@
-{"employees":[{"name":"Alice","id":"E001","department":"HR"},{"name":"Bob","id":"E002","department":"IT"},{"name":"Lucas","id":"E003","department":"Orelious"}]}
+{
+    "employees": [{
+            "name": "Bob",
+            "id": "E002",
+            "department": "IT"
+        }, {
+            "name": "Lucas",
+            "id": "E003",
+            "department": "Orelious"
+        }, {
+            "name": "Levi",
+            "id": "E004",
+            "department": "CCS"
+        }, {
+            "hobbies": ["Hiking", "Knitting"],
+            "name": "Ritcher",
+            "id": "E005",
+            "department": "Internal Affairs"
+        }, {
+            "hobbies": ["Hunting", "Photography", "Video Editing"],
+            "name": "Alucard",
+            "id": "E006",
+            "department": "Recruiting"
+        }, {
+            "hobbies": ["Jogging", "Reading Novels"],
+            "name": "Luke",
+            "id": "E009",
+            "department": "Internal Affairs"
+        }]
+}
